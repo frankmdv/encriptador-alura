@@ -77,7 +77,7 @@ function insertMessage(type='encrypt') {
 			<li class="message">
 				<div class="copy">
 					<button class="copy-icon" type="button">
-						<img src="../imgs/copyIcon.svg" alt="Copy icon">
+						<img src="./imgs/copyIcon.svg" alt="Copy icon">
 					</button>
 				</div>
 				<p class="message__text">${ newMessage }</p>
