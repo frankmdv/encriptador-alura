@@ -114,11 +114,7 @@ textArea.addEventListener('input', () => {
 
 
 const encryptButton = document.getElementsByClassName('button--encrypt')[0];
-encryptButton.addEventListener('click', () => {
-	insertMessage();
-});
+encryptButton.addEventListener('click', insertMessage);
 
 const decryptButton = document.getElementsByClassName('button--decrypt')[0];
-decryptButton.addEventListener('click', () => {
-	insertMessage('decrypt');
-});
+decryptButton.addEventListener('click', insertMessage.bind(null, 'decrypt'));
