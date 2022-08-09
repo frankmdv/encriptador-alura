@@ -73,23 +73,32 @@ function insertMessage(type='encrypt') {
 		}
 		
 		const listMessages = document.getElementsByClassName('list-messages')[0];
-		listMessages.innerHTML = `
-			<li class="message">
-				<div class="copy">
-					<button class="copy-icon" type="button">
-						<img src="./imgs/copyIcon.svg" alt="Copy icon">
-					</button>
-				</div>
-				<p class="message__text">${ newMessage }</p>
-			</li>
-			${ listMessages.innerHTML }
+		const messageElement = document.createElement('li');
+		messageElement.classList.add('message');
+		messageElement.innerHTML = `
+			<div class="copy">
+				<button class="copy-icon ${ newMessage }" type="button">
+					<img src="./imgs/copyIcon.svg" alt="Copy icon">
+				</button>
+			</div>
+			<p class="message__text">${ newMessage }</p>
 		`;
+
+		if (listMessages.innerHTML === '')
+			listMessages.appendChild(messageElement);
+		else {
+			const firstMessageElement = document.getElementsByClassName('message')[0];
+			listMessages.insertBefore(messageElement, firstMessageElement);
+		}
 
 		const copyButton = document.getElementsByClassName('copy-icon')[0];
 		copyButton.addEventListener('click', () => {
-			navigator.clipboard.writeText(newMessage).then(() => {
-				alert("Copied to clipboard");
-			});
+			if (navigator.clipboard) {
+				navigator.clipboard.writeText(newMessage).then(() => {
+					alert('Copiado en el portapapeles');
+				});
+			} else 
+				alert('No se puede copiar texto desde este navegador');
 		});
 	}
 }
